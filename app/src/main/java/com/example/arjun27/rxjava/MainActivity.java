@@ -8,7 +8,6 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.arjun27.rxjava.yahoo.RetrofitYahooServiceFactory;
-import com.example.arjun27.rxjava.yahoo.YahooService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -58,24 +57,24 @@ public class MainActivity extends AppCompatActivity {
 //                });
 
 
-        YahooService yahooService = new RetrofitYahooServiceFactory().create();
+        GETAPI getService = new RetrofitYahooServiceFactory().getapicreate();
 
         String query = "select * from yahoo.finance.quote where symbol in ('YHOO','AAPL','GOOG','MSFT')";
         String env = "store://datatables.org/alltableswithkeys";
 
         Observable.interval(0, 5, TimeUnit.SECONDS)
                 .flatMap(
-                        i -> yahooService.yqlQuery(query, env)
+                        i -> getService.getapi()
                                 .toObservable()
                 )
                 .subscribeOn(Schedulers.io())
-                .map(r -> r.getQuery().getResults().getQuote())
+                .map(r -> r)
                 .flatMap(Observable::fromIterable)
-                .map(r->StockUpdate.create(r))
+  //              .map(r->Category.create(r))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(stockUpdate -> {
-                    Log.d("APP", "New update " + stockUpdate.getStockSymbol());
-                    stockDataAdapter.add(stockUpdate);
+                .subscribe(getapi -> {
+                    Log.d("APP", "New update " + getapi);
+                    stockDataAdapter.add(getapi);
                 });
 
 

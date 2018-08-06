@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder> {
-    private final List<StockUpdate> data = new ArrayList<>();
+    private final List<Category> data = new ArrayList<>();
 
     @Override
     public StockUpdateViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -21,10 +21,10 @@ public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder
 
     @Override
     public void onBindViewHolder(StockUpdateViewHolder holder, int position) {
-        StockUpdate stockUpdate = data.get(position);
-        holder.setStockSymbol(stockUpdate.getStockSymbol());
-        holder.setPrice(stockUpdate.getPrice());
-        holder.setDate(stockUpdate.getDate());
+        Category stockUpdate = data.get(position);
+        holder.setStockSymbol(stockUpdate.getBody());
+//        holder.setPrice(stockUpdate.getTitle());
+//        holder.setDate(stockUpdate.getDate());
     }
 
     @Override
@@ -32,8 +32,13 @@ public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder
         return data.size();
     }
 
-    public void add(StockUpdate stockSymbol) {
-        this.data.add(stockSymbol);
+//    public void add(StockUpdate stockSymbol) {
+//        this.data.add(stockSymbol);
+//        notifyItemInserted(data.size() - 1);
+//    }
+
+    public void add(Category category) {
+        this.data.add(category);
         notifyItemInserted(data.size() - 1);
     }
 }
