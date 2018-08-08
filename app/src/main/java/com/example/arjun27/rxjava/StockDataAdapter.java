@@ -32,13 +32,18 @@ public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder
         return data.size();
     }
 
-//    public void add(StockUpdate stockSymbol) {
-//        this.data.add(stockSymbol);
-//        notifyItemInserted(data.size() - 1);
-//    }
 
-    public void add(Category category) {
-        this.data.add(category);
-        notifyItemInserted(data.size() - 1);
+
+    public void add1(Category newcategory) {
+        for (Category category : data) {
+            if (category.getBody().equals(newcategory.getBody())) {
+                return;
+            }
+        }
+
+        this.data.add(0, newcategory);
+        notifyItemInserted(0);
     }
+
+
 }

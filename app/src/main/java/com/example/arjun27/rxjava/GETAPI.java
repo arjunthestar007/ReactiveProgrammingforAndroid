@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface GETAPI {
 
-    @GET("/posts")
+    @GET("/posts?id=30")
     Single<List<Category>> getapi();
 
     @GET("/posts?id=30")
